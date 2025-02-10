@@ -28,7 +28,7 @@ const AllCards = () => {
   
     useEffect(() => {
       const fetchSubs = async () => {
-        const resp = await fetch("http://127.0.0.1:8000/subreddits/");
+        const resp = await fetch("https://feistybit.onrender.com/subreddits/");
         const data = await resp.json();
         console.log("RESPONDED", data);
         setSubs(data); // Store the data in state
