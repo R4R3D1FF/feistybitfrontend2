@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 async function getUsername(id){
     console.log("ID WAS", id);
-    let rows = await fetch(`http://127.0.0.1:8000/user/${id}/`);
+    let rows = await fetch(`https://feistybit.onrender.com/user/${id}/`);
     rows = await rows.json();
     console.log("HERE ARE");
     console.log(rows);
@@ -16,7 +16,7 @@ async function getUsername(id){
 //         vote: 1,
 //     });
 //     console.log(body);
-//     let vari = await fetch('http://127.0.0.1:8000/vote/', {
+//     let vari = await fetch('https://feistybit.onrender.com/vote/', {
 //         method: 'PUT',
 //         headers: {
 //             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -32,7 +32,7 @@ async function getUsername(id){
 //         vote: 0,
 //     });
 //     console.log(body);
-//     let vari = await fetch('http://127.0.0.1:8000/vote/', {
+//     let vari = await fetch('https://feistybit.onrender.com/vote/', {
 //         method: 'PUT',
 //         headers: {
 //             'Content-Type': 'application/json' // Ensure the server knows it's JSON

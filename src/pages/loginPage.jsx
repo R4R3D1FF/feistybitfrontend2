@@ -1,4 +1,22 @@
 import { useState } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+
+function GoogleLoginButton() {
+  const responseMessage = (response) => {
+      console.log(response);
+  };
+  const errorMessage = (error) => {
+      console.log(error);
+  };
+  return (
+      <div>
+          <h2>React Google Login</h2>
+          <br />
+          <br />
+          <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      </div>
+  )
+}
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +36,7 @@ const LoginForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/login/', {
+    fetch('https://feistybit.onrender.com/login/', {
         method: 'POST',
         credentials: "include",
         headers: {
@@ -51,33 +69,36 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 text-left">
-      <div>
-        <label htmlFor="username" className="block">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          className="p-2 border border-gray-300"
-        />
-      </div>
-      <div>
-        <label htmlFor="password" className="block">Password </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="p-2 border border-gray-300"
-        />
-      </div>
-      <button type="submit" className="!bg-gray-300 text-bg-gray-400 !p-2 !rounded-full">
-        Log In
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <div>
+          <label htmlFor="username" className="block">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className="p-2 border border-gray-300"
+          />
+        </div>
+        <div>
+          <label htmlFor="password" className="block">Password </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="p-2 border border-gray-300"
+          />
+        </div>
+        <button type="submit" className="!bg-gray-300 text-bg-gray-400 !p-2 !rounded-full">
+          Log In
+        </button>
+      </form>
+      <GoogleLoginButton/>
+    </div>
   );
 };
 

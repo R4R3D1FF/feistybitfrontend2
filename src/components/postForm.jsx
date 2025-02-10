@@ -18,7 +18,7 @@ const PostForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/submit/', {
+    fetch('https://feistybit.onrender.com/submit/', {
         method: 'POST',
         credentials: "include",
         headers: {
