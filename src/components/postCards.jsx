@@ -6,9 +6,9 @@ async function fetchPosts(sub = "all", mode = "top", userpageMode = 0) {
   try {
     let response;
     if (!userpageMode)
-      response = await fetch(`http://127.0.0.1:8000/r/${sub}/${mode}?count=0`);
+      response = await fetch(`https://feistybit.onrender.com/r/${sub}/${mode}?count=0`);
     else
-      response = await fetch(`http://127.0.0.1:8000/u/${sub}/`);
+      response = await fetch(`https://feistybit.onrender.com/u/${sub}/`);
     console.log("RESPOSE AAYA", response);
     const data = await response.json();
 

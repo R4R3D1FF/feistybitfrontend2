@@ -36,7 +36,7 @@ import { PiArrowFatUp, PiArrowFatDown, PiArrowFatUpFill, PiArrowFatDownFill } fr
 
 async function getSubredditName(id){
     console.log("ID WAS", id);
-    let rows = await fetch(`http://127.0.0.1:8000/subreddit/${id}/`);
+    let rows = await fetch(`https://feistybit.onrender.com/subreddit/${id}/`);
     rows = await rows.json();
     console.log("HERE ARE");
     console.log(rows);
@@ -44,7 +44,7 @@ async function getSubredditName(id){
 }
 
 async function updateUserVote(userid, postid, vote){
-    fetch(`http://127.0.0.1:8000/vote/${userid}/${postid}`,{
+    fetch(`https://feistybit.onrender.com/vote/${userid}/${postid}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -62,7 +62,7 @@ async function sendUpvote(post){
         vote: 1,
     });
     console.log(body);
-    let vari = await fetch('http://127.0.0.1:8000/vote/', {
+    let vari = await fetch('https://feistybit.onrender.com/vote/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -78,7 +78,7 @@ async function revokeUpvote(post){
         vote: 1,
     });
     console.log(body);
-    let vari = await fetch('http://127.0.0.1:8000/vote/', {
+    let vari = await fetch('https://feistybit.onrender.com/vote/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -94,7 +94,7 @@ async function sendDownvote(post){
         vote: 0,
     });
     console.log(body);
-    let vari = await fetch('http://127.0.0.1:8000/vote/', {
+    let vari = await fetch('https://feistybit.onrender.com/vote/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -110,7 +110,7 @@ async function revokeDownvote(post){
         vote: 0,
     });
     console.log(body);
-    let vari = await fetch('http://127.0.0.1:8000/vote/', {
+    let vari = await fetch('https://feistybit.onrender.com/vote/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -136,7 +136,7 @@ const PostCard = ({ post }) => {  // Destructure the post prop
                 setUservote(0);
                 return;
             }
-            const response = await fetch(`http://127.0.0.1:8000/vote/${localStorage.userid}/${post.postid}`);
+            const response = await fetch(`https://feistybit.onrender.com/vote/${localStorage.userid}/${post.postid}`);
             const data = await response.json(); // Parse JSON
             if (data.length > 0) { // Ensure the response contains data
                 setUservote(data[0].vote);
