@@ -2,6 +2,7 @@ import { AllCards } from "../components/subCards.jsx";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LogOut from "../utils/logout.jsx";
+import REACT_APP_BACKEND_URI from "../../settings.json"
 
 const Layout = () => {
   const [username, setUsername] = useState();
@@ -11,7 +12,7 @@ const Layout = () => {
 
     // if (username)
     //   return;
-    fetch("http://127.0.0.1:8000/currUser/", {
+    fetch(`http://${REACT_APP_BACKEND_URI}/currUser/`, {
         method: "GET",
         credentials: "include" // Ensures cookies are sent
     })
