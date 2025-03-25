@@ -1,42 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { PiArrowFatUp, PiArrowFatDown, PiArrowFatUpFill, PiArrowFatDownFill } from "react-icons/pi";
+import settings from "../../settings.json";
 
 
-
-
-// const HollowArrowUp = () => (
-//     <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox="0 0 24 24"
-//         fill="none"
-//         stroke="currentColor"
-//         strokeWidth="2"
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//         className="w-6 h-6 inline"
-//     >
-//         <path d="M12 5l7 7h-4v7h-6v-7H5z" />
-//     </svg>
-// );
-
-// const SolidArrowUp = () => (
-//     <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox="0 0 24 24"
-//         fill="currentColor"
-//         stroke="none"
-//         strokeWidth="2"
-//         strokeLinecap="round"
-//         strokeLinejoin="round"
-//         className="w-6 h-6 inline"
-//     >
-//         <path d="M12 5l7 7h-4v7h-6v-7H5z" />
-//     </svg>
-// );
 
 async function getSubredditName(id){
     console.log("ID WAS", id);
-    let rows = await fetch(`https://feistybit.onrender.com/subreddit/${id}/`);
+    let rows = await fetch(`${settings.REACT_APP_BACKEND_URI}/subreddit/${id}/`);
     rows = await rows.json();
     console.log("HERE ARE");
     console.log(rows);
@@ -44,7 +14,7 @@ async function getSubredditName(id){
 }
 
 async function updateUserVote(userid, postid, vote){
-    fetch(`https://feistybit.onrender.com/vote/${userid}/${postid}`,{
+    fetch(`${settings.REACT_APP_BACKEND_URI}/vote/${userid}/${postid}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -62,7 +32,7 @@ async function sendUpvote(post){
         vote: 1,
     });
     console.log(body);
-    let vari = await fetch('https://feistybit.onrender.com/vote/', {
+    let vari = await fetch(`${settings.REACT_APP_BACKEND_URI}/vote/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -78,7 +48,7 @@ async function revokeUpvote(post){
         vote: 1,
     });
     console.log(body);
-    let vari = await fetch('https://feistybit.onrender.com/vote/', {
+    let vari = await fetch(`${settings.REACT_APP_BACKEND_URI}/vote/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -94,7 +64,7 @@ async function sendDownvote(post){
         vote: 0,
     });
     console.log(body);
-    let vari = await fetch('https://feistybit.onrender.com/vote/', {
+    let vari = await fetch(`${settings.REACT_APP_BACKEND_URI}/vote/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -110,7 +80,7 @@ async function revokeDownvote(post){
         vote: 0,
     });
     console.log(body);
-    let vari = await fetch('https://feistybit.onrender.com/vote/', {
+    let vari = await fetch(`${settings.REACT_APP_BACKEND_URI}/vote/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -136,7 +106,7 @@ const PostCard = ({ post }) => {  // Destructure the post prop
                 setUservote(0);
                 return;
             }
-            const response = await fetch(`https://feistybit.onrender.com/vote/${localStorage.userid}/${post.postid}`);
+            const response = await fetch(`${settings.REACT_APP_BACKEND_URI}/vote/${localStorage.userid}/${post.postid}`);
             const data = await response.json(); // Parse JSON
             if (data.length > 0) { // Ensure the response contains data
                 setUservote(data[0].vote);

@@ -1,14 +1,15 @@
 import PostCard from './postCard.jsx';
 import { useState, useEffect } from 'react';
+import settings from "../../settings.json";
 
 async function fetchPosts(sub = "all", mode = "top", userpageMode = 0) {
   console.log("INSIDE FETCHPOSTS");
   try {
     let response;
     if (!userpageMode)
-      response = await fetch(`https://feistybit.onrender.com/r/${sub}/${mode}?count=0`);
+      response = await fetch(`${settings.REACT_APP_BACKEND_URI}/r/${sub}/${mode}?count=0`);
     else
-      response = await fetch(`https://feistybit.onrender.com/u/${sub}/`);
+      response = await fetch(`${settings.REACT_APP_BACKEND_URI}/u/${sub}/`);
     console.log("RESPOSE AAYA", response);
     const data = await response.json();
 

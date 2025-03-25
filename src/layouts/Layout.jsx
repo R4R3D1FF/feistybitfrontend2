@@ -4,11 +4,33 @@ import { useEffect, useState } from "react";
 import LogOut from "../utils/logout.jsx";
 
 const Layout = () => {
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     document.body.classList.add("bg-gray-100");
+
+    // if (username)
+    //   return;
+    fetch("http://127.0.0.1:8000/currUser/", {
+        method: "GET",
+        credentials: "include" // Ensures cookies are sent
+    })
+    .then(response => {
+      if (response.status === 403) {
+        throw new Error("403 Forbidden - User not authenticated");
+      }
+      return response.json();
+    }) // Parse JSON response
+    .then(data => {
+        if (data.username) {
+            setUsername(data.username); // Update state with the username
+        }
+    })
+    .catch(error => console.error("Error fetching user:", error));
+
   }, []);
+
+  console.log(username);
 
     return (
       <div className="absolute left-0 top-0 h-full overflow-auto w-full">
@@ -20,7 +42,7 @@ const Layout = () => {
             <input type="text" className="search-input" placeholder="Search Reddit" autoComplete="off" />
           </div>
           <div className="inline absolute right-0 top-[33%]">
-            {username === null ?
+            {(username === null || username === undefined) ?
               <div className="bg-orange-700 py-2 mx-3 inline px-3 rounded-full">
                 <a href = "/login/" className="!text-gray-200">
                   <b>Log In</b>

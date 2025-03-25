@@ -1,8 +1,11 @@
+import settings from "../../settings.json";
+
 function LogOut(){
     console.log("LOGGIGN");
-    localStorage.removeItem("username");
-    localStorage.removeItem("userid");
-    fetch("https://feistybit.onrender.com/logout/");
+    fetch(`${settings.REACT_APP_BACKEND_URI}/logout/`, {
+        method: 'POST',
+        credentials: "include"
+    });
     window.location.reload();
 }
 

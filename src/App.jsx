@@ -16,7 +16,6 @@ import RedditPageClone from './components/gptPage.jsx';
 import { User } from './components/user.jsx';
 
 
-
 function CommentCardsWrapper() {
   const { postid } = useParams();
   return <CommentCards postid={postid} />

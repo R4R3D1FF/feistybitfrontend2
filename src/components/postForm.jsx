@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import settings from "../../settings.json";
 
 const PostForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const PostForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://feistybit.onrender.com/submit/', {
+    fetch(`${settings.REACT_APP_BACKEND_URI}/submit/`, {
         method: 'POST',
         credentials: "include",
         headers: {

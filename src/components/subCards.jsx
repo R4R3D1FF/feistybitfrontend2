@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SubCard from "./subCard.jsx";
+import settings from "../../settings.json";
 
 const SubCards = 
 ({ subs }) => {
@@ -28,7 +29,7 @@ const AllCards = () => {
   
     useEffect(() => {
       const fetchSubs = async () => {
-        const resp = await fetch("https://feistybit.onrender.com/subreddits/");
+        const resp = await fetch(`${settings.REACT_APP_BACKEND_URI}/subreddits/`);
         const data = await resp.json();
         console.log("RESPONDED", data);
         setSubs(data); // Store the data in state

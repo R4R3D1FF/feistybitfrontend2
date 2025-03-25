@@ -2,10 +2,11 @@ import CommentCard from './commentCard.jsx';
 import { useState, useEffect } from 'react';
 import PostCard from './postCard.jsx';
 import { ChildrenCards } from './childrenCards.jsx';
+import settings from "../../settings.json";
 
 async function fetchCommentsFromPost(postid) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/r/sub/comments/${postid}/`);
+    const response = await fetch(`${settings.REACT_APP_BACKEND_URI}/r/sub/comments/${postid}/`);
     const data = await response.json();
 
     if (Array.isArray(data.children)) {

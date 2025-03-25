@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import settings from "../../settings.json";
 
 async function getUsername(id){
     console.log("ID WAS", id);
-    let rows = await fetch(`https://feistybit.onrender.com/user/${id}/`);
+    let rows = await fetch(`${settings.REACT_APP_BACKEND_URI}/user/${id}/`);
     rows = await rows.json();
     console.log("HERE ARE");
     console.log(rows);
@@ -16,7 +16,7 @@ async function getUsername(id){
 //         vote: 1,
 //     });
 //     console.log(body);
-//     let vari = await fetch('https://feistybit.onrender.com/vote/', {
+//     let vari = await fetch('${process.env.REACT_APP_BACKEND_URI}/vote/', {
 //         method: 'PUT',
 //         headers: {
 //             'Content-Type': 'application/json' // Ensure the server knows it's JSON
@@ -32,7 +32,7 @@ async function getUsername(id){
 //         vote: 0,
 //     });
 //     console.log(body);
-//     let vari = await fetch('https://feistybit.onrender.com/vote/', {
+//     let vari = await fetch('${process.env.REACT_APP_BACKEND_URI}/vote/', {
 //         method: 'PUT',
 //         headers: {
 //             'Content-Type': 'application/json' // Ensure the server knows it's JSON

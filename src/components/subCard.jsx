@@ -1,5 +1,3 @@
-
-
 const SubCard = ({ sub }) => {
     console.log("sub was", sub);
     return (

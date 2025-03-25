@@ -1,10 +1,31 @@
 import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
+import settings from "../../settings.json";
+
+const responseMessage = (response) => {
+  fetch(`${settings.REACT_APP_BACKEND_URI}/google-login/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(response),
+  })
+    .then(async (res) => {
+      const data = await res.json()
+      if (!res.ok){
+        console.log("Error:", data)
+      }
+      else{
+        window.location.replace("/");
+        console.log("Server Response:", data);
+      }
+
+    })
+    .catch((error) => console.error("Error:", error));
+  console.log(response);
+};
 
 function GoogleLoginButton() {
-  const responseMessage = (response) => {
-      console.log(response);
-  };
   const errorMessage = (error) => {
       console.log(error);
   };
@@ -36,7 +57,7 @@ const LoginForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://feistybit.onrender.com/login/', {
+    fetch(`${settings.REACT_APP_BACKEND_URI}/login/`, {
         method: 'POST',
         credentials: "include",
         headers: {
@@ -57,8 +78,6 @@ const LoginForm = () => {
         return response.json(); // Parse the response as JSON
     })
     .then(responseData => {
-      localStorage.setItem('username', responseData.username);
-      localStorage.setItem('userid', responseData.userid);
       console.log('Logged in with username:', responseData);
       window.location.replace("/");
     })
