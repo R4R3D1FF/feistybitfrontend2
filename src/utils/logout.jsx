@@ -1,8 +1,8 @@
 import settings from "../../settings.json";
 
-function LogOut(){
+async function LogOut(){
     console.log("LOGGIGN");
-    fetch(`${settings.REACT_APP_BACKEND_URI}/logout/`, {
+    await fetch(`${settings.REACT_APP_BACKEND_URI}/logout/`, {
         method: 'POST',
         credentials: "include"
     });

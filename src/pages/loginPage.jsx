@@ -5,6 +5,7 @@ import settings from "../../settings.json";
 const responseMessage = (response) => {
   fetch(`${settings.REACT_APP_BACKEND_URI}/google-login/`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -16,8 +17,8 @@ const responseMessage = (response) => {
         console.log("Error:", data)
       }
       else{
-        window.location.replace("/");
         console.log("Server Response:", data);
+        window.location.replace("/");
       }
 
     })
